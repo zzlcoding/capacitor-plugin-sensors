@@ -1,23 +1,17 @@
 import { WebPlugin } from '@capacitor/core';
-import { SensorsPluginPlugin } from './definitions';
+import { SensorsPluginPlugin, Sensor, SensorType } from './definitions';
 
 export class SensorsPluginWeb extends WebPlugin implements SensorsPluginPlugin {
-  constructor() {
-    super({
-      name: 'SensorsPlugin',
-      platforms: ['web']
-    });
-  }
-
-  async echo(options: { value: string }): Promise<{value: string}> {
-    console.log('ECHO', options);
-    return options;
-  }
+    constructor() {
+        super({
+            name: '_SensorsPlugin',
+            platforms: ['web']
+        });
+    }
+    get(_options: { type: SensorType }): Promise<{ sensors: Sensor[] }> {
+        throw new Error("Method not implemented.");
+    }
+    stop(_options: Sensor): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 }
-
-const SensorsPlugin = new SensorsPluginWeb();
-
-export { SensorsPlugin };
-
-import { registerWebPlugin } from '@capacitor/core';
-registerWebPlugin(SensorsPlugin);
